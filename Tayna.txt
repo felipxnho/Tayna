@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário</title>
+    <style>
+        body {
+            background-color: red;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .options {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .option {
+            margin-bottom: 10px;
+        }
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+        .option label {
+            font-size: 18px;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            background-color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        a:hover {
+            background-color: #555;
+        }
+        .hidden {
+            display: none;
+        }
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            10%, 20% { transform: translate(-5px, 0); }
+            30%, 50%, 70%, 90% { transform: translate(5px, 0); }
+            40%, 60%, 80% { transform: translate(-5px, 0); }
+            100% { transform: translate(0, 0); }
+        }
+        .shake {
+            animation: shake 0.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>Você sabe quem é a mulher mais linda do mundo?</h1>
+    <div class="options">
+        <div class="option" id="gal_gadot_option">
+            <input type="radio" id="gal_gadot" name="answer" value="A">
+            <label for="gal_gadot">A) Gal Gadot</label>
+        </div>
+        <div class="option" id="grazi_massafera_option">
+            <input type="radio" id="grazi_massafera" name="answer" value="B">
+            <label for="grazi_massafera">B) Grazi Massafera</label>
+        </div>
+        <div class="option" id="pablo_vittar_option">
+            <input type="radio" id="pablo_vittar" name="answer" value="C">
+            <label for="pablo_vittar">C) Pablo Vittar</label>
+        </div>
+        <div class="option" id="tayna_frota_option">
+            <input type="radio" id="tayna_frota" name="answer" value="D">
+            <label for="tayna_frota">D) Tayna Frota (Mais conhecida como mulher mais linda do mundo)</label>
+        </div>
+    </div>
+    <a href="#" id="checkAnswer">Verificar Resposta</a>
+
+    <script>
+        document.getElementById("checkAnswer").addEventListener("click", function(event) {
+            event.preventDefault();
+            const answer = document.querySelector('input[name="answer"]:checked');
+            if (answer) {
+                const selectedAnswer = answer.value;
+                if (selectedAnswer === "D") {
+                    // Redirecionar para o vídeo do Youtube
+                    window.location.href = "https://youtu.be/eoJpwfldyoU?si=yU-6HlCmZqUacdPi";
+                } else {
+                    // Tornar a tela tremendo e mostrar a mensagem "RESPOSTA ERRADA"
+                    shakeScreen();
+                    showErrorMessage();
+                    hideOption(selectedAnswer);
+                }
+            } else {
+                alert("Por favor, selecione uma resposta.");
+            }
+        });
+
+        function shakeScreen() {
+            document.body.classList.add("shake");
+            setTimeout(function() {
+                document.body.classList.remove("shake");
+            }, 500);
+        }
+
+        function showErrorMessage() {
+            const errorMessage = document.createElement("p");
+            errorMessage.textContent = "RESPOSTA ERRADA";
+            errorMessage.style.color = "red";
+            document.body.appendChild(errorMessage);
+            setTimeout(function() {
+                errorMessage.remove();
+            }, 2000);
+        }
+
+        function hideOption(selectedOption) {
+            document.getElementById(selectedOption.toLowerCase() + "_option").classList.add("hidden");
+        }
+    </script>
+</body>
+</html>
